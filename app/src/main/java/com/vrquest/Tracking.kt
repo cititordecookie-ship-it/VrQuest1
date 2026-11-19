@@ -36,7 +36,8 @@ class HeadTracker(private val ctx: Context) : SensorEventListener {
     @Volatile private var raw = FloatArray(9) { if (it % 4 == 0) 1f else 0f }
 
     fun start() { startMs = SystemClock.uptimeMillis(); autoCentered = false; sensor?.let { sm.registerListener(this, it, SensorManager.SENSOR_DELAY_FASTEST) } }
-    fun stop() { sm.unregisterListener(this) }
+       fun stop() { sm.unregisterListener(this) }
+    override fun onAccuracyChanged(s: Sensor?, accuracy: Int) {}
 
     @Suppress("DEPRECATION")
     override fun onSensorChanged(e: SensorEvent) {
